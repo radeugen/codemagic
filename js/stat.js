@@ -43,13 +43,16 @@ window.renderStatistics = function (ctx, names, times) {
     // Diagram
 
     var maxTime = getMaxElement(times);
-    var randBlueColor;
 
     for (var i = 0; i < names.length; i++) {
         ctx.fillStyle = '#000';
         ctx.fillText(names[i], CLOUD_X + BAR_GAP + (BAR_WIDTH / 2) + ((BAR_GAP + BAR_WIDTH) * i), CLOUD_HEIGHT);
 
-        (names[i] === 'Вы') ? ctx.fillStyle = 'rgb(255,0,0)' : ctx.fillStyle = `rgb(0,0,${Math.random() * 256})`;
+        if(names[i] == 'Вы') {
+            ctx.fillStyle = 'rgb(255,0,0)';
+        } else {
+            ctx.fillStyle = 'rgb(0,0,'+ Math.floor((Math.random() * 256)) +')';
+        }
 
         ctx.fillRect(CLOUD_X + BAR_GAP + ((BAR_GAP + BAR_WIDTH) * i), CLOUD_HEIGHT - GAP - FONT_GAP - ((BAR_MAX_HEIGHT * times[i]) / maxTime), BAR_WIDTH, (BAR_MAX_HEIGHT * times[i]) / maxTime);
         ctx.fillStyle = '#000';
